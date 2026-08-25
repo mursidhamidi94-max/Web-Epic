@@ -54,6 +54,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 84px;
     font-size: 16px;
 }
 
@@ -749,46 +750,13 @@ footer {
     text-transform: uppercase;
 }
 
-/* ==========================================================================
-   7. PRICING PAGES (GRADUATION, MATERNITY, SMASHCAKE)
-   ========================================================================== */
-
-.pricing-container {
-    padding: calc(var(--header-height) + 50px) 6% 80px;
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.page-tag {
-    font-family: var(--font-serif-accent);
-    font-size: 12px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--primary-color);
-    font-weight: 700;
-    margin-bottom: 8px;
-    display: inline-block;
-}
-
-.page-title {
-    font-family: var(--font-heading);
-    font-size: clamp(28px, 4vw, 40px);
-    letter-spacing: 1.5px;
-    color: var(--primary-dark);
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.page-subtitle {
-    font-family: var(--font-serif-accent);
-    font-size: 15px;
-    letter-spacing: 4px;
-    color: var(--primary-light);
-    margin-bottom: 45px;
-    font-weight: 600;
-    text-transform: uppercase;
+.page-desc {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    max-width: 540px;
+    margin: 0 auto 14px;
 }
 
 .pricing-grid {
@@ -823,7 +791,7 @@ footer {
 /* COVER GAMBAR SAMPUL PAKET */
 .price-card-img {
     width: 100%;
-    height: 200px;
+    height: clamp(165px, 24vw, 200px);
     border-radius: var(--radius-md);
     overflow: hidden;
     margin-bottom: 18px;
@@ -1102,8 +1070,8 @@ footer {
 .maternity-swiper .swiper-slide,
 .pasphoto-swiper .swiper-slide,
 .personal-swiper .swiper-slide {
-    width: 270px;
-    height: 360px;
+    width: clamp(210px, 28vw, 280px);
+    aspect-ratio: 3 / 4;
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
@@ -1224,26 +1192,30 @@ footer {
     fill: #ffffff !important;
 }
 
-/* SECTION PRICING DALAM BIRTHDAY & MATERNITY */
+/* SECTION PRICING DALAM BIRTHDAY, MATERNITY, PAS PHOTO & PERSONAL */
 .birthday-pricing,
-.maternity-pricing {
+.maternity-pricing,
+.pasphoto-pricing,
+.personal-pricing {
     width: 100%;
-    max-width: 860px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    justify-content: center;
     gap: 28px;
     margin: 10px auto 0;
 }
 
-/* SECTION PRICING DALAM PAS PHOTO & PERSONAL */
-.pasphoto-pricing,
+.birthday-pricing,
+.maternity-pricing {
+    max-width: 860px;
+}
+
+.pasphoto-pricing {
+    max-width: 820px;
+}
+
 .personal-pricing {
-    width: 100%;
-    max-width: 1100px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-    margin: 10px auto 0;
+    max-width: 420px;
 }
 
 /* ==========================================================================
@@ -1370,6 +1342,27 @@ footer {
 }
 
 /* ==========================================================================
+   ACCESSIBILITY & MOTION PREFERENCES
+   ========================================================================== */
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ==========================================================================
    11. MEDIA QUERIES (RESPONSIVE)
    ========================================================================== */
 
@@ -1380,25 +1373,22 @@ footer {
         gap: 20px;
     }
 
+    .package-card:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: calc(50% - 10px);
+    }
+
     .pricing-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
     .birthday-container,
     .maternity-container,
-    .pasphoto-container {
+    .pasphoto-container,
+    .personal-container {
         padding-top: calc(var(--header-height) + 30px);
         text-align: center;
-    }
-
-    .birthday-pricing,
-    .maternity-pricing,
-    .pasphoto-pricing {
-        max-width: 700px;
-    }
-
-    .pasphoto-pricing {
-        grid-template-columns: repeat(2, 1fr);
     }
 
     .photo-masonry-grid {
@@ -1446,7 +1436,8 @@ footer {
     }
 
     .nav.active {
-        max-height: 420px;
+        max-height: min(420px, calc(100vh - var(--header-height)));
+        overflow-y: auto;
         opacity: 1;
         visibility: visible;
         padding: 15px 0 20px;
@@ -1489,52 +1480,53 @@ footer {
         left: 6%;
         right: 6%;
         max-width: 100%;
-        top: 41%;
-        transform: translateY(-50%);
+        top: auto;
+        bottom: 96px;
+        transform: none;
     }
 
     .hero-badge {
-        margin-bottom: 14px;
+        margin-bottom: 12px;
+        font-size: 9px;
+        letter-spacing: 2px;
+        padding: 4px 11px;
     }
 
     .hero-content h1 {
-        margin-bottom: 16px;
+        margin-bottom: 12px;
+        font-size: clamp(30px, 8vw, 44px);
+    }
+
+    .hero-content p {
+        margin-bottom: 0;
     }
 
     .hero-actions {
-        margin-top: 38px;
+        margin-top: 22px;
     }
 
     .dots {
         bottom: 24px;
     }
 
-    .hero-content h1 {
-        font-size: clamp(30px, 8vw, 44px);
+    .modal-gallery {
+        padding: 70px 4% 40px;
+    }
+
+    .close-modal {
+        top: 14px;
+        right: 14px;
+        width: 42px;
+        height: 42px;
+        font-size: 28px;
     }
 
     .pricing-grid {
         grid-template-columns: 1fr;
     }
 
-    .birthday-pricing,
-    .maternity-pricing,
-    .pasphoto-pricing,
-    .personal-pricing {
-        grid-template-columns: 1fr;
-        max-width: 440px;
-    }
-
     .about {
         padding: 80px 6%;
-    }
-
-    .birthday-swiper .swiper-slide,
-    .maternity-swiper .swiper-slide,
-    .pasphoto-swiper .swiper-slide,
-    .personal-swiper .swiper-slide {
-        width: 220px;
-        height: 300px;
     }
 
     footer {
@@ -1559,11 +1551,11 @@ footer {
     .hero-actions {
         flex-direction: column;
         align-items: stretch;
-        margin-top: 30px;
+        margin-top: 18px;
     }
 
     .hero-content {
-        top: 38%;
+        bottom: 86px;
     }
 
     .btn-hero-primary,
@@ -1576,11 +1568,7 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    .birthday-swiper .swiper-slide,
-    .maternity-swiper .swiper-slide,
-    .pasphoto-swiper .swiper-slide,
-    .personal-swiper .swiper-slide {
-        width: 190px;
-        height: 260px;
+    .package-card:last-child:nth-child(odd) {
+        width: 100%;
     }
 }
