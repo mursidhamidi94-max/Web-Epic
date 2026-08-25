@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Epic Studio</title>
+    <link rel="icon" type="image/png" href="source/putih.png">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +14,12 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style.css">
+    <script>
+        if (window.location.pathname.endsWith('/birthday.html')) {
+            const newUrl = window.location.pathname.replace(/\/birthday\.html$/, 'birthday') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', newUrl);
+        }
+    </script>
 </head>
 <body>
 

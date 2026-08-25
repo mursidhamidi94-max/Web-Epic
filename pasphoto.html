@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Epic Studio</title>
+    <link rel="icon" type="image/png" href="source/putih.png">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,6 +12,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+    <script>
+        if (window.location.pathname.endsWith('/pasphoto.html')) {
+            const newUrl = window.location.pathname.replace(/\/pasphoto\.html$/, 'pasphoto') + window.location.search + window.location.hash;
+            window.history.replaceState(null, '', newUrl);
+        }
+    </script>
 </head>
 <body>
 
