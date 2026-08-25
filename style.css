@@ -1218,6 +1218,29 @@ footer {
     max-width: 420px;
 }
 
+/* GAMBAR PAKET PAS PHOTO MENGGUNAKAN RASIO PORTRAIT */
+.pasphoto-pricing .price-card-img {
+    height: auto;
+    aspect-ratio: 3 / 4;
+}
+
+/* KARTU COUPLE: BINGKAI MENGIKUTI RASIO ASLI KOLOSANYA (LANDSCAPE) AGAR GAMBAR PAS */
+.pasphoto-pricing .price-card-img-contain {
+    aspect-ratio: 1535 / 1023;
+    background-color: #ede5da;
+}
+
+.pasphoto-pricing .price-card-img-contain img {
+    object-fit: cover;
+}
+
+/* KARTU PAS PHOTO TUNGGAL DIBUAT LEBIH KECIL */
+.pasphoto-pricing .price-card-sm {
+    max-width: 300px;
+    justify-self: center;
+    align-self: start;
+}
+
 /* ==========================================================================
    9. MODAL GALLERY (SYMMETRIC & MASONRY)
    ========================================================================== */
